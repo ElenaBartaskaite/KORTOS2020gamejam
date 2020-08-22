@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Actors/Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/main.gd" type="Script" id=2]
+[ext_resource path="res://src/Areas/playArea.gd" type="Script" id=3]
+[ext_resource path="res://src/Areas/playArea.tscn" type="PackedScene" id=4]
+
+[node name="main" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Card" parent="." instance=ExtResource( 1 )]
+position = Vector2( 632, 600 )
+
+[node name="playArea" parent="." instance=ExtResource( 4 )]
+position = Vector2( 8, 32 )
+script = ExtResource( 3 )
+[connection signal="clicked" from="Card" to="." method="_on_pickable_clicked"]
+[connection signal="input_event" from="Card" to="Card" method="_on_Card_input_event"]
