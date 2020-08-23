@@ -4,6 +4,7 @@ signal clicked
 
 var held = false
 
+
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
@@ -26,3 +27,7 @@ func drop(impulse=Vector2.ZERO):
 		mode = RigidBody2D.MODE_RIGID
 		apply_central_impulse(impulse)
 		held = false
+		var coliBodies = get_colliding_bodies()
+		if coliBodies.size() > 0 and (coliBodies[0].has_method("handle_card_drop")):
+			coliBodies[0].handle_card_drop(self)
+			queue_free()
